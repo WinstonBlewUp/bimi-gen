@@ -1,0 +1,10 @@
+<div class="container glass-card animate__animated animate__zoomIn" style="border-radius: 4px;">
+    <h2>Convert your PNG logo to BIMI logo</h2>
+    <%= simple_form_for(@logo) do |f| %>
+      <%= f.input :title, label: "Brand Name" %>
+      <%= f.input :description %>
+      <%= f.input :photo, as: :file, label: "PNG file" %>
+      <%= f.submit "Generate SVG" %>
+    <% end %>
+  </div>
+</div>
