@@ -1199,3 +1199,4 @@ Processing by LogosController#show as HTML
 Completed 200 OK in 1512ms (Views: 1506.7ms | ActiveRecord: 4.0ms | Allocations: 11699)
 
 
+[dotenv] Loaded [33m.env[0m
