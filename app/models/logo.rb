@@ -14,7 +14,7 @@ class Logo < ApplicationRecord
 
   # before_save :resize_png
 
-  validates :photo, attached: true, content_type: ['png'], aspect_ratio: :square
+  validates :photo, attached: true, content_type: ['png']
 
   def resize_png
     return unless photo.attached?

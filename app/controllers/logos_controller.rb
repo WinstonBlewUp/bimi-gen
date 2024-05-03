@@ -32,17 +32,17 @@ class LogosController < ApplicationController
     api_key = ENV['ZIMZAR_API_KEY']
     source_file = logo.photo.url
     target_format = "svg"
-    endpoint = "https://sandbox.zamzar.com/v1/jobs"
+    endpoint = "https://api.zamzar.com/v1/jobs"
     uri = URI(endpoint)
     Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
       request = Net::HTTP::Post::Multipart.new(
         uri.request_uri,
         'source_file' =>  source_file,
         'target_format' => target_format
-      )
-      request.basic_auth(api_key, '')
-      response = http.request(request)
-      data = JSON.parse(response.body)
+        )
+        request.basic_auth(api_key, '')
+        response = http.request(request)
+        data = JSON.parse(response.body)
       return data["id"].to_i
     end
   end
