@@ -1,0 +1,48 @@
+<h1><%= @logo.title %>'s logo</h1>
+<% if @logo.file_id == nil %>
+  <% @logo.fetch_file_id %>
+<% end %>
+<% if @logo.file_id != nil && @logo.svg_code == nil %>
+  <% @logo.fetch_svg_file %>
+<% end %>
+<% @logo.resize_png %>
+
+<div>
+  <p><%= @logo.description %></p>
+  <div class="img-container d-flex justify-content-evenly mb-4">
+    <div>
+      <h3>PNG</h3>
+      <% if @logo.photo.attached? %>
+        <%= cl_image_tag @logo.photo.key, height: 50, width: 50, crop: :fill %>
+      <% end %>
+    </div>
+    <div>
+      <h3>SVG</h3>
+      <% if @logo.svg_code != nil %>
+        <%= image_tag("data:image/svg+xml;base64,#{Base64.encode64(@logo.custom_svg)}".html_safe, size: "200x200") %>
+      <% end %>
+      <% if @logo.svg_attachment.attached? %>
+        <%= cl_image_path @logo.svg_attachment.key, height: 50, width: 50, crop: :fill %>
+      <% end %>
+    </div>
+  </div>
+  <div class="accordion mb-4" id="accordionExample" style="width: 90vw; margin: 0 auto;">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          View inline SVG code
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body overflow-auto" style="height: 40vh;">
+          <% if @logo.svg_code != nil %>
+            <p><%= @logo.custom_svg %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="margin-left: 37vw;">
+  <%= link_to "Generate another logo", new_logo_path, class:"btn btn-primary" %>
+</div>
