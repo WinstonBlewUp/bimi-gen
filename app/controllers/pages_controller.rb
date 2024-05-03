@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
     def new
-        render file: "#{Rails.root}/app/views/logos/new.html.erb", layout: false
+        render new_logo_path
     end
   end
